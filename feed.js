@@ -5,12 +5,13 @@ function populateFeed(){
           if (xhr.readyState == 4) {
               if (xhr.status == 200) {
                 var postList = JSON.parse(xhr.responseText);
+                var orderedList = postList.sort((a, b) => parseFloat(b.index) - parseFloat(a.index));
                 feed.innerHTML = "";
-                for (var i = 0, len = postList.length; i < len; ++i) {
-                  var currentValue = postList[i];
+                for (var i = 0, len = orderedList.length; i < len; ++i) {
+                  var currentValue = orderedList[i];
                   var currentTitle = currentValue.title;
                   var currentContent = currentValue.content;
-  
+
                   var postBox = document.createElement("div");
                   postBox.setAttribute("class", "post");
                   var postMeta = document.createElement("div");
